@@ -21,8 +21,9 @@ npm run dev
 
 ## Supabase 설정
 
-1. `docs/supabase-info.md`의 프로젝트 정보를 바탕으로 `.env.local`에 이미 접속 정보가 채워져 있습니다.
-   (직접 다른 프로젝트를 쓰려면 `.env.local.example`을 참고해 값을 교체하세요.)
+1. `docs/supabase-info.md`의 프로젝트 정보(Project ID, Publishable Key)가 [`lib/supabaseClient.ts`](lib/supabaseClient.ts)에
+   직접 하드코딩되어 있습니다. 별도의 `.env` 파일이 필요 없습니다.
+   (다른 프로젝트로 교체하려면 이 파일의 `SUPABASE_PROJECT_ID`, `SUPABASE_PUBLISHABLE_KEY` 값만 바꾸면 됩니다.)
 2. Supabase 대시보드 → **SQL Editor**에서 [`database/schema.sql`](database/schema.sql) 내용을 그대로 실행해
    `mbti_results` 테이블, RLS 정책, Realtime publication을 생성합니다.
 3. 테이블이 생성되면 메인 화면의 실시간 참여자 카운팅 배너와, 결과 화면에서의 데이터 저장이 정상 동작합니다.
@@ -62,4 +63,4 @@ database/
 
 GitHub 저장소: https://github.com/yangtg19853585/my-mpti-app
 
-Vercel 등에 배포 시, 프로젝트 환경변수에 `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`를 동일하게 등록하세요.
+Supabase 접속 정보가 소스코드에 하드코딩되어 있으므로, Vercel 등에 배포할 때 별도의 환경변수 등록 없이 바로 빌드/배포할 수 있습니다.
